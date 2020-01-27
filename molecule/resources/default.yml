@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  vars_files:
+    - "../resources/.vault_mysecrets"
+  roles:
+    - role: ansible-role-sshprivkey

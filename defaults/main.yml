@@ -1,0 +1,4 @@
+---
+myprivatekey: "{{ vault_myprivatekey }}"
+mypubkey: "{{ vault_mypubkey }}"
+

@@ -1,0 +1,23 @@
+---
+#- name: "{{ ansible_distribution | lower }} | {{ ansible_distribution_release }} - Verify Mandatory Vars"
+#  assert:
+#    that:
+#      - myprivatekey is defined
+#      - mypubkey is defined
+
+- name: "{{ ansible_distribution | lower }} | {{ ansible_distribution_release }} - Ensure hiden ssh folder exist"
+  file:
+    path: "{{ ansible_user_dir }}/.ssh"
+    state: directory
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_id }}"
+    mode: 0600
+
+- name: "{{ ansible_distribution | lower }} | {{ ansible_distribution_release }} - Deploy private/pub key"
+  template:
+    src: "{{ item}}.j2"
+    dest: "{{ ansible_user_dir }}/.ssh/{{ item }}"
+    mode: 0400
+  with_items:
+    - id_rsa
+    - id_rsa.pub
